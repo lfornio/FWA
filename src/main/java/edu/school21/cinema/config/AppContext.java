@@ -2,6 +2,8 @@ package edu.school21.cinema.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import edu.school21.cinema.repositories.UsersRepository;
+import edu.school21.cinema.repositories.UsersRepositoryImpl;
 import edu.school21.cinema.services.UsersService;
 import edu.school21.cinema.services.UsersServiceImpl;
 import org.springframework.context.annotation.Bean;
@@ -24,11 +26,17 @@ public class AppContext {
 
     @Bean
     JdbcTemplate jdbcTemplate(DataSource dataSource) {
-        return new JdbcTemplate(dataSource);
+        return new JdbcTemplate(dataSource());
     }
 
     @Bean
     UsersService usersService() {
-        return new UsersServiceImpl();
+        return new UsersServiceImpl(usersRepository());
     }
+
+    @Bean
+    UsersRepository usersRepository() {
+        return new UsersRepositoryImpl(jdbcTemplate(dataSource()));
+    }
+
 }

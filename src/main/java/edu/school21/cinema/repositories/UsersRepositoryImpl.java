@@ -1,12 +1,22 @@
 package edu.school21.cinema.repositories;
 
 import edu.school21.cinema.models.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
 public class UsersRepositoryImpl implements UsersRepository{
+
+    private final JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    public UsersRepositoryImpl(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
     @Override
     public User findById(Long id) throws SQLException {
         return null;
@@ -19,6 +29,8 @@ public class UsersRepositoryImpl implements UsersRepository{
 
     @Override
     public void save(User entity) throws SQLException {
+        System.out.println("save");
+//        jdbcTemplate.execute("");
 
     }
 
