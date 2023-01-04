@@ -21,23 +21,21 @@ import java.sql.SQLException;
 @WebServlet("/signUp")
 public class SignUpServlet extends HttpServlet {
 //    private static final String url = "/WEB-INF/html/SignUp.html";
-    private static final String url = "/WEB-INF/jsp/SignUp.jsp";
+    private static final String URL = "/WEB-INF/jsp/SignUp.jsp";
 
     private UsersService usersService;
-    private PasswordEncoderService passwordEncodeService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         ServletContext context = config.getServletContext();
         ApplicationContext springContext = (ApplicationContext) context.getAttribute("springContext");
         this.usersService = springContext.getBean(UsersServiceImpl.class);
-        this.passwordEncodeService = springContext.getBean(PasswordEncoderServiceImpl.class);
     }
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ServletContext servletContext = req.getServletContext();
-        RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(url);
+        RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(URL);
         requestDispatcher.forward(req, resp);
     }
 
@@ -48,7 +46,7 @@ public class SignUpServlet extends HttpServlet {
         String firstName = req.getParameter("firstName");
         String lastName = req.getParameter("lastName");
         String phoneNumber = req.getParameter("phoneNumber");
-        String password = passwordEncodeService.encode(req.getParameter("password"));
+        String password = req.getParameter("password");
         try {
             usersService.signUp(email, firstName, lastName, phoneNumber, password);
         } catch (AppExceptions ex) {

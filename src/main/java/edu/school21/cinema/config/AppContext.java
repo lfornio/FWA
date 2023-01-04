@@ -14,6 +14,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.sql.DataSource;
 
@@ -40,12 +41,20 @@ public class AppContext {
     }
 
     @Bean
-    UsersService usersService(UsersRepository usersRepository) {
-        return new UsersServiceImpl(usersRepository);
+    BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder(8);
+    }
+    @Bean
+    PasswordEncoderService passwordEncoderService(BCryptPasswordEncoder encoder) {
+        return new PasswordEncoderServiceImpl(encoder);
     }
 
     @Bean
-    PasswordEncoderService passwordEncoderService() {
-        return new PasswordEncoderServiceImpl();
+    UsersService usersService(UsersRepository usersRepository, PasswordEncoderService passwordEncoderService) {
+        return new UsersServiceImpl(usersRepository, passwordEncoderService);
     }
+
+
+
+
 }
