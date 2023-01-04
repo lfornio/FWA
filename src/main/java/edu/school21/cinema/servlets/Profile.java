@@ -18,11 +18,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
-@WebServlet("/signIn")
-public class SignInServlet extends HttpServlet {
+@WebServlet("/profile")
+public class Profile extends HttpServlet {
 
-    private static final String SIGN_IN_PAGE = "/WEB-INF/jsp/SignIn.jsp";
-    private static final String PROFILE = "/profile";
+    private static final String PROFILE = "/WEB-INF/jsp/Profile.jsp";
 
     private UsersService usersService;
 
@@ -35,22 +34,13 @@ public class SignInServlet extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher(SIGN_IN_PAGE);
+        ServletContext servletContext = req.getServletContext();
+        RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(PROFILE);
         requestDispatcher.forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setCharacterEncoding("UTF-8");
-        String email = req.getParameter(Fields.EMAIL.getValue());
-        String password = req.getParameter(Fields.PASSWORD.getValue());
-        try {
-            usersService.signIn(email, password);
-        } catch (AppExceptions e) {
-            doGet(req, resp);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        resp.sendRedirect(PROFILE);
+
     }
 }

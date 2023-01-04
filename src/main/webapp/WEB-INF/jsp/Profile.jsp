@@ -1,5 +1,4 @@
-<%@ page import="org.springframework.util.StringUtils" %>
-<%@ page import="edu.school21.cinema.models.Fields" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: Elena Temyach
   Date: 12.12.2022
@@ -12,7 +11,7 @@
 <head>
     <!--    <meta charset="UTF-8">-->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Регистрация</title>
+    <title>Профиль</title>
     <style>
         @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
@@ -152,6 +151,14 @@
             text-align: center;
         }
 
+        .login h4 {
+            color: #fff;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+
         .login h6 {
             color: #fff;
             text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
@@ -185,29 +192,8 @@
     </style>
 </head>
 <body>
-<div class="login">
-    <h1>Регистрация</h1>
-    <form method="post">
-        <input type="text" name="email" placeholder="Электронная почта" required="required"/>
-        <% String firstName = !StringUtils.isEmpty(request.getParameter(Fields.EMAIL.getValue()))
-                ? request.getParameter(Fields.FIRST_NAME.getValue()) : ""; %>
-        <input type="text" name="firstName" placeholder="Имя" required="required"
-               value="<%= firstName %>"/>
-        <% String lastName = !StringUtils.isEmpty(request.getParameter(Fields.EMAIL.getValue()))
-                ? request.getParameter(Fields.LAST_NAME.getValue()) : ""; %>
-        <input type="text" name="lastName" placeholder="Фамилия" required="required"
-               value="<%= lastName %>"/>
-        <% String phoneNumber = !StringUtils.isEmpty(request.getParameter(Fields.EMAIL.getValue()))
-                ? request.getParameter(Fields.PHONE_NUMBER.getValue()) : ""; %>
-        <input type="text" name="phoneNumber" placeholder="Номер телефона" required="required"
-               value="<%= phoneNumber %>"/>
-        <input type="password" name="password" placeholder="Пароль" required="required"/>
-        <button type="submit" class="btn btn-primary btn-block btn-large">Зарегистрироваться</button>
-    </form>
-
-    <% if (!StringUtils.isEmpty(request.getParameter("email"))) { %>
-    <h6>Пользователь с такой электронной почтой уже зарегистрирован</h6>
-    <% } %>
+<div>
+    <h1>Профиль</h1>
 </div>
 </body>
 </html>

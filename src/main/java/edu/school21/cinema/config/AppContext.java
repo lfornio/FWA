@@ -3,16 +3,14 @@ package edu.school21.cinema.config;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import edu.school21.cinema.repositories.UsersRepository;
-import edu.school21.cinema.repositories.UsersRepositoryImpl;
+import edu.school21.cinema.repositories.Impl.UsersRepositoryImpl;
 import edu.school21.cinema.services.Impl.PasswordEncoderServiceImpl;
 import edu.school21.cinema.services.Impl.UsersServiceImpl;
 import edu.school21.cinema.services.PasswordEncoderService;
 import edu.school21.cinema.services.UsersService;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -53,8 +51,4 @@ public class AppContext {
     UsersService usersService(UsersRepository usersRepository, PasswordEncoderService passwordEncoderService) {
         return new UsersServiceImpl(usersRepository, passwordEncoderService);
     }
-
-
-
-
 }

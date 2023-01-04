@@ -42,12 +42,8 @@ public class UsersServiceImpl implements UsersService {
             throw new NoUserOrPasswordErrorException();
         }
         User user = optionalUser.get();
-        System.out.println(user);
-        System.out.println(password);
         String passwordFromDataBase = user.getPassword();
-        boolean isSame = passwordEncoderService.decode(password, passwordFromDataBase);
-        System.out.println(isSame);
-        if (!isSame) {
+        if (!passwordEncoderService.decode(password, passwordFromDataBase)) {
             throw new NoUserOrPasswordErrorException();
         }
     }

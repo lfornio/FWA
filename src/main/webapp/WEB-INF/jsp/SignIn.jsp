@@ -1,4 +1,5 @@
-<%@ page import="org.springframework.util.StringUtils" %><%--
+<%@ page import="org.springframework.util.StringUtils" %>
+<%@ page import="edu.school21.cinema.models.Fields" %><%--
   Created by IntelliJ IDEA.
   User: Elena Temyach
   Date: 12.12.2022
@@ -195,7 +196,7 @@
 <div class="login">
     <h1>Войти в профиль</h1>
     <form method="post">
-        <% String emailInput = !StringUtils.isEmpty(request.getParameter("email")) ? request.getParameter("email") : ""; %>
+        <% String emailInput = !StringUtils.isEmpty(request.getParameter(Fields.EMAIL.getValue())) ? request.getParameter(Fields.EMAIL.getValue()) : ""; %>
         <input type="text" name="email" placeholder="Электронная почта" required="required" value="<%= emailInput %>"/>
         <input type="password" name="password" placeholder="Пароль" required="required"/>
         <button type="submit" class="btn btn-primary btn-block btn-large">Войти</button>
