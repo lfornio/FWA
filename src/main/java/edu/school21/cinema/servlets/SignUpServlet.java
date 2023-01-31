@@ -22,6 +22,7 @@ import java.sql.SQLException;
 @WebServlet("/signUp")
 public class SignUpServlet extends HttpServlet {
     private static final String SIGN_UP_PAGE = "/WEB-INF/jsp/SignUp.jsp";
+    private static final String SIGN_IN = "/signIn";
 
     private UsersService usersService;
 
@@ -40,7 +41,6 @@ public class SignUpServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setCharacterEncoding("UTF-8");
         String email = req.getParameter(Fields.EMAIL.getValue());
         String firstName = req.getParameter(Fields.FIRST_NAME.getValue());
         String lastName = req.getParameter(Fields.LAST_NAME.getValue());
@@ -54,5 +54,6 @@ public class SignUpServlet extends HttpServlet {
         catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        resp.sendRedirect(SIGN_IN);
     }
 }

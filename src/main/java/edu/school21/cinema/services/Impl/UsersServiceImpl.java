@@ -36,7 +36,7 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public void signIn(String email, String password) throws SQLException, AppExceptions {
+    public User signIn(String email, String password) throws SQLException, AppExceptions {
         Optional<User> optionalUser = usersRepository.findByEmail(email);
         if (!optionalUser.isPresent()) {
             throw new NoUserOrPasswordErrorException();
@@ -46,5 +46,6 @@ public class UsersServiceImpl implements UsersService {
         if (!passwordEncoderService.decode(password, passwordFromDataBase)) {
             throw new NoUserOrPasswordErrorException();
         }
+        return user;
     }
 }
